@@ -144,7 +144,7 @@ export default function SurahPage() {
                 : 'bg-[#9C7B4F] hover:bg-[#7E5C3C] disabled:bg-gray-400'} 
                 text-white px-4 py-2 rounded-md transition-all duration-200 shadow-md`}
             >
-              ← Sebelumnya
+              ← 
             </button>
             
             <input
@@ -167,7 +167,7 @@ export default function SurahPage() {
                 : 'bg-[#9C7B4F] hover:bg-[#7E5C3C] disabled:bg-gray-400'} 
                 text-white px-4 py-2 rounded-md transition-all duration-200 shadow-md`}
             >
-              Berikutnya →
+               →
             </button>
           </div>
         </div>

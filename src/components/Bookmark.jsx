@@ -33,11 +33,11 @@ const Bookmark = () => {
   };
 
   const backgroundStyle = {
-    backgroundImage: `url('/api/placeholder/1920/1080')`, // Replace with your actual background image
+    backgroundImage: `url('/src/assets/bg-putih.png')`, // Replace with your actual background image
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed',
-    backgroundColor: 'rgba(247, 244, 228, 0.9)',
+    backgroundColor: 'rgba(247, 244, 228, 0.2)',
     backgroundBlendMode: darkMode ? 'overlay' : 'soft-light',
   };
 
@@ -83,7 +83,7 @@ const Bookmark = () => {
               Belum ada bookmark tersimpan.
             </p>
             <p className={`mt-2 ${darkMode ? 'text-gray-400' : 'text-[#9C7B4F]'}`}>
-              Tambahkan bookmark dengan menekan ikon bintang pada ayat yang ingin Anda simpan.
+              Tambahkan bookmark dengan menekan ikon  pada ayat yang ingin Anda simpan.
             </p>
           </div>
         ) : (
@@ -135,7 +135,7 @@ const Bookmark = () => {
         {bookmarks.length > 0 && (
           <div className="text-center mt-10 mb-6">
             <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-[#9C7B4F]'}`}>
-              {bookmarks.length} ayat tersimpan | Al-Qur'an Al-Karim
+              {bookmarks.length} ayat tersimpan | MyQuran
             </p>
           </div>
         )}
