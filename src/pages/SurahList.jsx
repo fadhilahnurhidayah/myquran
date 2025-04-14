@@ -5,20 +5,14 @@ import { IoMdSearch } from "react-icons/io";
 
 const BASE_URL = 'https://api.quran.com/api/v4';
 
-// Helper function to create markup for HTML content
-const createMarkup = (htmlContent) => {
-  return { __html: htmlContent };
-};
+const createMarkup = (htmlContent) => ({ __html: htmlContent });
 
-// Interface for search results
 const SurahList = () => {
   const [surahs, setSurahs] = useState([]);
   const [filteredSurahs, setFilteredSurahs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
-  
-  // Search results states
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
 
@@ -47,22 +41,20 @@ const SurahList = () => {
         return;
       }
 
-      // Get detailed search results for dropdown
       const detailedResponse = await fetch(
         `${BASE_URL}/search?q=${encodeURIComponent(query)}&language=id&size=10`
       );
       const detailedData = await detailedResponse.json();
-      setSearchResults(detailedData.search.results || []);
+      const results = detailedData.search.results || [];
+
+      setSearchResults(results);
       setShowSearchDropdown(true);
 
-      // Filter surahs for the main list
-      const searchedSurahIds = [...new Set(detailedData.search.results.map(result => result.verse_key.split(':')[0]))];
-      
-      const searchResults = surahs.filter(surah => 
+      const searchedSurahIds = [...new Set(results.map(result => result.verse_key.split(':')[0]))];
+      const searchResultsFiltered = surahs.filter(surah =>
         searchedSurahIds.includes(surah.id.toString())
       );
-
-      setFilteredSurahs(searchResults);
+      setFilteredSurahs(searchResultsFiltered);
     } catch (error) {
       console.error('Error searching surahs:', error);
       setFilteredSurahs(surahs);
@@ -71,7 +63,6 @@ const SurahList = () => {
     setIsSearching(false);
   };
 
-  // Debounce search function
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (searchTerm) {
@@ -84,13 +75,7 @@ const SurahList = () => {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, surahs]);
-
-  const handleSearch = (e) => {
-    const term = e.target.value;
-    setSearchTerm(term);
-  };
 
   const clearSearch = () => {
     setSearchTerm('');
@@ -99,24 +84,19 @@ const SurahList = () => {
     setShowSearchDropdown(false);
   };
 
-  // Helper function to get surah name by ID
   const getSurahName = (surahNumber) => {
     const surah = surahs.find(s => s.id.toString() === surahNumber);
     return surah ? surah.name_simple : `Surah ${surahNumber}`;
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.search-container')) {
         setShowSearchDropdown(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   if (loading || isSearching) {
@@ -146,7 +126,7 @@ const SurahList = () => {
                 placeholder="Cari ayat Al-Quran"
                 className="outline-none text-lg w-full"
                 value={searchTerm}
-                onChange={handleSearch}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               {searchTerm && (
                 <button
@@ -157,10 +137,9 @@ const SurahList = () => {
               )}
             </div>
             <p className="text-center mt-2 text-sm italic text-[#8a7b5c] font-nunito tracking-wide">Cari berdasarkan nomor surah, nama surah, atau arti surah</p>
-            
-            {/* Search Results Dropdown */}
+
             {showSearchDropdown && searchResults.length > 0 && (
-              <div className="absolute z-50 mt-2 w-full mx-auto left-0 right-0 bg-white rounded-lg shadow-xl border">
+              <div className="absolute z-50 mt-2 w-full bg-white rounded-lg shadow-xl border">
                 <div className="max-h-96 overflow-y-auto">
                   {searchResults.map((result) => {
                     const [surahNumber, verseNumber] = result.verse_key.split(':');
@@ -172,7 +151,6 @@ const SurahList = () => {
                         className="block p-4 hover:bg-gray-50 border-b last:border-b-0"
                         onClick={() => {
                           setShowSearchDropdown(false);
-                          // Store the verse number in localStorage for persistence
                           localStorage.setItem('scrollToVerse', verseNumber);
                           localStorage.setItem('lastSearchedSurah', surahNumber);
                         }}
@@ -228,8 +206,8 @@ const SurahList = () => {
                     <p className="text-base text-[#6d5c38] opacity-80 mt-1 mb-3 font-lateef italic tracking-wide">{surah.translated_name.name}</p>
                     <div className="h-px bg-gradient-to-r from-transparent via-[rgba(192,162,109,0.4)] to-transparent my-3" />
                     <div className="flex justify-between text-sm text-[#b39260] font-medium font-nunito">
-                      <span className="flex items-center gap-1">📍 {surah.revelation_place === 'meccan' ? 'Makkah' : 'Madinah'}</span>
-                      <span className="flex items-center gap-1">🗒️ {surah.verses_count} Ayat</span>
+                      <span>📍 {surah.revelation_place === 'meccan' ? 'Makkah' : 'Madinah'}</span>
+                      <span>🗒️ {surah.verses_count} Ayat</span>
                     </div>
                   </div>
                 </div>
