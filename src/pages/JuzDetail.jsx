@@ -80,7 +80,6 @@ function JuzDetail() {
   return (
     <div className="min-h-screen bg-[#f8f3e8] text-[#6d5c38] font-[Poppins]">
       <div className="container mx-auto px-4 py-10">
-        {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold text-[#FFD700]">Juz {juzData.id}</h1>
           <p className="mt-2 text-[#7d6b4c]">Berisi ayat dari:</p>

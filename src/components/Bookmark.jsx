@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getBookmarks, removeBookmark } from '../utils/bookmark';
-import { useNavigate, Link } from "react-router-dom"; // Add Link import
+import { useNavigate, Link } from "react-router-dom"; 
 import { ArrowLeft, Moon, Sun, Trash2 } from "lucide-react";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
@@ -33,7 +33,7 @@ const Bookmark = () => {
   };
 
   const backgroundStyle = {
-    backgroundImage: `url('/src/assets/bg-putih.png')`, // Replace with your actual background image
+    backgroundImage: `url('/src/assets/bg-putih.png')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed',
@@ -95,8 +95,8 @@ const Bookmark = () => {
                   darkMode 
                     ? 'bg-gray-800 bg-opacity-80 text-white border-gray-700' 
                     : 'bg-white bg-opacity-90 text-gray-800 border-[#D6C6AF]'
-                } cursor-pointer`} // Add cursor-pointer
-                onClick={() => handleVerseClick(item.verseKey)} // Add click handler
+                } cursor-pointer`} 
+                onClick={() => handleVerseClick(item.verseKey)} 
               >
                 <div className="flex justify-between items-center mb-3">
                   <h3 className={`text-lg font-medium ${darkMode ? 'text-amber-300' : 'text-[#7D5A3C]'}`}>
@@ -104,7 +104,7 @@ const Bookmark = () => {
                   </h3>
                   <button
                     onClick={(e) => {
-                      e.stopPropagation(); // Prevent triggering parent onClick
+                      e.stopPropagation(); 
                       handleRemove(item.surahNumber, item.ayahNumber);
                     }}
                     className={`p-2 rounded-full ${

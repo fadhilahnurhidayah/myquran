@@ -18,12 +18,10 @@ function SurahByJuz() {
         if (!response.ok) throw new Error(`Failed to fetch juzs: ${response.status}`);
         
         const data = await response.json();
-        console.log('API Response:', data); // For debugging
-        
-        // Filter juzs to only include 1-30
+        console.log('API Response:', data); 
+
         const validJuzs = data.juzs.filter(juz => juz.id >= 1 && juz.id <= 30);
         
-        // Sort juzs by id to ensure they're in order
         validJuzs.sort((a, b) => a.id - b.id);
         
         setJuzs(validJuzs);
