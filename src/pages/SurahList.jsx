@@ -136,7 +136,6 @@ const SurahList = () => {
                 >✕</button>
               )}
             </div>
-            <p className="text-center mt-2 text-sm italic text-[#8a7b5c] font-nunito tracking-wide">Cari berdasarkan nomor surah, nama surah, atau arti surah</p>
 
             {showSearchDropdown && searchResults.length > 0 && (
               <div className="absolute z-50 mt-2 w-full bg-white rounded-lg shadow-xl border">

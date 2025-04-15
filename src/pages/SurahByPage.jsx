@@ -82,8 +82,7 @@ export default function SurahPage() {
 
   return (
     <div
-      className={`min-h-screen font-nunito ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-[#F7F4E4] text-gray-800'} 
-        bg-[url('/assets/bg-putih.png')] bg-cover bg-center bg-fixed bg-blend-soft-light`}
+      className={`min-h-screen font-nunito ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-[#F7F4E4] text-gray-800'} `}
     >
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
