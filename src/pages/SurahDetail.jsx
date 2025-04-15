@@ -72,11 +72,11 @@
           
           setVerses(combined);
 
-          const audioRes = await fetch(`https://api.quran.com/api/v4/chapter_recitations/1/${id}`);
+          const audioRes = await fetch(`https://api.quran.com/api/v4/chapter_recitations/7/${id}`);
           const audioData = await audioRes.json();
           setSurahAudioUrl(audioData.audio_file.audio_url);
 
-          const verseAudioRes = await fetch(`https://api.quran.com/api/v4/recitations/1/by_chapter/${id}`);
+          const verseAudioRes = await fetch(`https://api.quran.com/api/v4/recitations/7/by_chapter/${id}`);
           const verseAudioData = await verseAudioRes.json();
           setVersesAudio(verseAudioData.audio_files || []);
 
